@@ -129,7 +129,6 @@ def showMatrizConfusion(nameModel,matrizConfusion,nameModelKN,matrizConfusionKN,
     print(tablaNB)
 
     
-
 def graficarMapHead():
     f, axes = plt.subplots(2, 3, figsize=(10, 6), sharex=True)
     sns.heatmap(matriz_confusion_lg, ax=axes[0,0])
@@ -140,6 +139,8 @@ def graficarMapHead():
     plt.setp(axes, yticks=[])
     plt.tight_layout()
     plt.show()
+
+
 
 
 # punto 6
@@ -259,5 +260,4 @@ showMatrizConfusion(nameModel,matrizConfusion,nameModelKN,matrizConfusionKN, nam
 # punto 5
 graficarMapHead()
 
-    
 
