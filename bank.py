@@ -141,5 +141,123 @@ def graficarMapHead():
     plt.tight_layout()
     plt.show()
 
+
+# punto 6
+def metrics(str_model, y_test, y_pred):
+    print('-' * 50 + '\n')
+    print('Punto 6')
+    print(str.upper(str_model))
+    print('\n')
+    print(classification_report(y_test, y_pred))
+
+
+
+
+
+
+def showRocCurveMatrix(fpr, tpr, matriz_confusion):
+    sns.heatmap(matriz_confusion)
+    plt.show()
+    plt.plot(fpr, tpr, color='orange', label='ROC')
+    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend()
+    plt.show()    
+
+
+
+
+
+model = LogisticRegression()
+model, acc_validation, acc_test, y_pred, acc_train =  metricsTraining(model, x_train, x_test, y_train, y_test)
+matriz_confusion_lg, fpr_lg, tpr_lg  = matrizConfusionAuc(model, x_test, y_test, y_pred)
+precisionScore = precision_score(y_test, y_pred)
+recallScore = recall_score(y_test, y_pred)
+f1Score = f1_score(y_test,y_pred)
+matrizConfusion = confusion_matrix(y_test, y_pred)
+nameModel = 'Logistic Regression'
+Metrics = classification_report(y_test, y_pred)
+metrics('Logistic Regression', y_test, y_pred)
+
+
+showRocCurveMatrix(fpr_lg, tpr_lg, matriz_confusion_lg)
+
+
+model = KNeighborsClassifier(n_neighbors = 3)
+model, acc_validationKN, acc_testKN, y_pred, acc_trainKN = metricsTraining(model, x_train, x_test, y_train, y_test)
+matriz_confusion_knn, fpr_knn, tpr_knn  = matrizConfusionAuc(model, x_test, y_test, y_pred)
+precisionScoreKN = precision_score(y_test, y_pred)
+recallScoreKN = recall_score(y_test, y_pred)
+f1ScoreKN = f1_score(y_test,y_pred)
+matrizConfusionKN = confusion_matrix(y_test, y_pred)
+nameModelKN = 'KNeighbors Classifier'
+MetricsKN = classification_report(y_test, y_pred)
+metrics('KNeighbors Classifier', y_test, y_pred)
+
+
+
+showRocCurveMatrix(fpr_knn, tpr_knn, matriz_confusion_knn)
+
+
+
+model = AdaBoostClassifier(n_estimators=10)
+model, acc_validationBC, acc_testBC, y_pred, acc_trainBC = metricsTraining(model, x_train, x_test, y_train, y_test)
+matriz_confusion_ada, fpr_ada, tpr_ada  = matrizConfusionAuc(model, x_test, y_test, y_pred)
+precisionScoreBC = precision_score(y_test, y_pred)
+recallScoreBC = recall_score(y_test, y_pred)
+f1ScoreBC = f1_score(y_test,y_pred)
+matrizConfusionBC = confusion_matrix(y_test, y_pred)
+nameModelBC = 'AdaBoost Classifier'
+MetricsBC = classification_report(y_test, y_pred)
+metrics('AdaBoost Classifier', y_test, y_pred)
+
+
+
+showRocCurveMatrix(fpr_ada, tpr_ada, matriz_confusion_ada)
+
+
+model = DecisionTreeClassifier()
+model, acc_validationTC, acc_testTC, y_pred, acc_trainTC = metricsTraining(model, x_train, x_test, y_train, y_test)
+matriz_confusion_dc, fpr_dc, tpr_dc  = matrizConfusionAuc(model, x_test, y_test, y_pred)
+precisionScoreTC = precision_score(y_test, y_pred)
+recallScoreTC = recall_score(y_test, y_pred)
+f1ScoreTC = f1_score(y_test,y_pred)
+matrizConfusionTC = confusion_matrix(y_test, y_pred)
+nameModelTC = 'Decision Tree Classifier'
+MetricsTC = classification_report(y_test, y_pred)
+metrics('Decision Tree Classifier', y_test, y_pred)
+
+
+
+showRocCurveMatrix(fpr_dc, tpr_dc, matriz_confusion_dc)
+
+
+
+model = GaussianNB()
+model, acc_validationNB, acc_testNB, y_pred, acc_trainNB = metricsTraining(model, x_train, x_test, y_train, y_test)
+matriz_confusion_NB, fpr_NB, tpr_NB  = matrizConfusionAuc(model, x_test, y_test, y_pred)
+precisionScoreNB = precision_score(y_test, y_pred)
+recallScoreNB = recall_score(y_test, y_pred)
+f1ScoreNB = f1_score(y_test,y_pred)
+matrizConfusionNB = confusion_matrix(y_test, y_pred)
+nameModelNB = 'Gaussian Naive Bayes'
+MetricsNB = classification_report(y_test, y_pred)
+metrics('Gaussian Naive Bayes', y_test, y_pred)
+
+
+showRocCurveMatrix(fpr_NB, tpr_NB, matriz_confusion_NB)
+
+
+# punto 3
+showMetrics('KNeighborns', acc_validation, acc_test, y_test, y_pred, acc_train, precisionScore, acc_validationKN, acc_testKN, acc_trainKN, precisionScoreKN, acc_validationBC, acc_testBC, acc_trainBC, precisionScoreBC, recallScoreBC,f1ScoreBC, acc_validationTC, acc_testTC, acc_trainTC, precisionScoreTC, recallScoreTC,f1ScoreTC, acc_validationNB, acc_testNB, acc_trainNB, precisionScoreNB, recallScoreNB,f1ScoreNB) 
+
+#punto 5 
+showMatrizConfusion(nameModel,matrizConfusion,nameModelKN,matrizConfusionKN, nameModelBC,matrizConfusionBC, nameModelTC,matrizConfusionTC, nameModelNB,matrizConfusionNB)
+
+# punto 5
+graficarMapHead()
+
     
 
